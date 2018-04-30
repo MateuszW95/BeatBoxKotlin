@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bignerdranch.android.beatboxkotlin.Models.BeatBox
+import com.bignerdranch.android.beatboxkotlin.Models.BeatBoxViewModel
 import com.bignerdranch.android.beatboxkotlin.Models.Sound
 import com.bignerdranch.android.beatboxkotlin.Models.SoundViewModel
 import com.bignerdranch.android.beatboxkotlin.databinding.FragmentBeatBoxBinding
@@ -29,9 +30,10 @@ class BeatBoxFragment: Fragment() {
     private lateinit var mBeatBox: BeatBox
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-       var binding=DataBindingUtil.inflate<FragmentBeatBoxBinding>(inflater,R.layout.fragment_beat_box,container,false)
+       var binding=DataBindingUtil.inflate<FragmentBeatBoxBinding>(inflater!!,R.layout.fragment_beat_box,container,false)
         binding.recyclerView.layoutManager=(GridLayoutManager(activity,3))
         binding.recyclerView.adapter=SoundAdapter(mBeatBox.mSounds)
+        binding.viewModel= BeatBoxViewModel(mBeatBox)
         return binding.root
     }
 
@@ -48,7 +50,7 @@ class BeatBoxFragment: Fragment() {
         }
 
         fun bind(sound: Sound){
-            mBinding.viewModel!!.setSound(sound)
+            mBinding.viewModel!!.mSound=(sound)
             mBinding.executePendingBindings()
         }
 
