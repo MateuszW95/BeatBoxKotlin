@@ -36,4 +36,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     kapt 'com.android.databinding:compiler:3.1.2'
+    testImplementation 'org.mockito:mockito-inline:2.18.3'
+    testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
 }

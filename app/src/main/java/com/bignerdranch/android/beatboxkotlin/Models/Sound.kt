@@ -3,7 +3,7 @@ package com.bignerdranch.android.beatboxkotlin.Models
 /**
  * Created by mateusz on 24.04.18.
  */
-class Sound(assetPath:String) {
+open class Sound(assetPath:String) {
     var mAssetPath=assetPath
     var mSoundId:Int = 0
     var mName:String

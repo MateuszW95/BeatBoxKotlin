@@ -59,10 +59,14 @@ class BeatBox(context: Context) {
     }
 
     fun play(sound: Sound){
-        val soundId=sound.mSoundId
-        if(soundId==null) return
-        mSoundPool.play(soundId,1.0f,1.0f,1,0,mRange)
+        val soundId: Int = sound.mSoundId ?: return
 
+        mSoundPool.play(soundId!!,1.0f,1.0f,1,0,mRange)
+
+    }
+
+    fun release(){
+        mSoundPool.release()
     }
 
 }

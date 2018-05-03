@@ -3,6 +3,7 @@ package com.bignerdranch.android.beatboxkotlin.Fragments
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -31,15 +32,25 @@ class BeatBoxFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
        var binding=DataBindingUtil.inflate<FragmentBeatBoxBinding>(inflater!!,R.layout.fragment_beat_box,container,false)
-        binding.recyclerView.layoutManager=(GridLayoutManager(activity,3))
+        var layoutManager=GridLayoutManager(activity,3)
+
+        binding.recyclerView.layoutManager=(layoutManager)
         binding.recyclerView.adapter=SoundAdapter(mBeatBox.mSounds)
+        binding.recyclerView.addItemDecoration(com.bignerdranch.android.beatboxkotlin.Models.DividerItemDecoration(2))
+
         binding.viewModel= BeatBoxViewModel(mBeatBox)
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        retainInstance=true
         mBeatBox= BeatBox(activity)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBeatBox.release()
     }
 
     private inner class SoundHolder(binding:ListItemSoundBinding):RecyclerView.ViewHolder(binding.root){
